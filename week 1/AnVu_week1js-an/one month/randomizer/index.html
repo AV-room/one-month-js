@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="when you don't really know what you're feeling">
+		<meta name="keywords" content="emoji">
+
+		<title>Eh?-moji</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<script>
+		
+			// LH part of emoji
+			var LHS = [
+				"<img src= 'smiling-face-with-open-mouth-and-cold-sweat-LHS.png' alt='smiling-face-with-open-mouth-and-cold-sweat-left' />",
+				"<img src= 'smiling-face-with-open-mouth-and-smiling-eyes-LHS.png' alt='smiling-face-with-open-mouth-and-smiling-eyes-left' />",
+				"<img src= 'smiling-face-with-open-mouth-LHS.png' alt='smiling-face-with-open-mouth-left' />",
+				"<img src= 'tears-of-joy-LHS.png' alt='tears-of-joy-left' />"
+			];
+
+			// RH part of emoji
+			var RHS = [
+				"<img src= 'smiling-face-with-open-mouth-and-cold-sweat-RHS.png' alt='smiling-face-with-open-mouth-and-cold-sweat-right' />",
+				"<img src= 'smiling-face-with-open-mouth-and-smiling-eyes-RHS.png' alt='smiling-face-with-open-mouth-and-smiling-eyes-right' />",
+				"<img src= 'smiling-face-with-open-mouth-RHS.png' alt='smiling-face-with-open-mouth-right' />",
+				"<img src= 'tears-of-joy-RHS.png' alt='tears-of-joy-right' />"
+			];
+			
+			var randomNumber_left = Math.floor(Math.random()*LHS.length);
+			var randomNumber_right = Math.floor(Math.random()*RHS.length);
+			
+			var LHSpng = LHS[randomNumber_left];
+			var RHSpng = RHS[randomNumber_right];
+
+			document.write(LHSpng + RHSpng);
+		
+		</script>
+	</head>
+	<body>
+		<!-- PAGE CONTENT WILL BE PRINTED HERE --> 
+	</body>
+</html>

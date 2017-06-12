@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Happy Hour App - How about a drink!?">
+		<meta name="keywords" content="happy hour, drink, beers">
+
+		<title>Happy Hour</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<script>
+		
+			// Our List of Bars
+			var bars = [
+				'Siggys',
+				'Blind Tiger',
+				'Zum Schneider',
+				'One Month',
+				'Home Sweet Home',
+				'Union Pool',
+				'Korean BBQ'+'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.20770395936!2d149.091477115269!3d-35.17637538031505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b17ab579c4b0d57%3A0xb71e3b26e22f2022!2s40+Lansdown+Cres%2C+Casey+ACT+2913!5e0!3m2!1sen!2sau!4v1496587684444" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+			];
+
+			// Our List of Friends
+			var friends = [
+				'Mattan',
+				'Chris',
+				'Lee',
+				'Casey',
+				'that girl you forgot to text back',
+				'Kayne West'
+			];
+
+			var randomNumber = Math.floor(Math.random()*bars.length);
+			
+			var barname = bars[randomNumber];
+			var friendname = friends[randomNumber];
+
+			document.write("How about you go to <strong>" + barname + "</strong> with <strong>" + friendname + "</strong>?");
+		
+		</script>
+	</head>
+	<body>
+		<!-- PAGE CONTENT WILL BE PRINTED HERE --> 
+	</body>
+</html>

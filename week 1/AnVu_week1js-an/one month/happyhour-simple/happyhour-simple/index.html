@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Happy Hour App - How about a drink!?">
+		<meta name="keywords" content="happy hour, drink, beers">
+
+		<title>Happy Hour</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<script>
+		
+			// Our List of Bars
+			var bars = [
+				'Siggys',
+				'Blind Tiger',
+				'Zum Schneider',
+				'Bloomingdales',
+				'Home Sweet Home',
+				'Union Pool'
+			];
+			
+			var mapEmbeds = [
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6938935294097!2d-73.99531278440149!3d40.7247546447718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259850cbcc303%3A0x306bb91aab0eba0d!2sSiggy&#39;s+Good+Food!5e0!3m2!1sen!2sau!4v1496632019225" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.3707261973327!2d-74.00542538440139!3d40.73186734433638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25993a10b6e59%3A0x974ded5ed3f5e014!2sBlind+Tiger!5e0!3m2!1sen!2sau!4v1496632108306" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.7164549364133!2d-73.98110568440155!3d40.72425804480216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25979dcad5647%3A0xeb77bc74cd054f06!2sZum+Schneider+NYC!5e0!3m2!1sen!2sau!4v1496632133539" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.811631951996!2d-74.00141568440152!3d40.722163044930284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598e1dc93331%3A0x624bf50cc1eb6d2!2sBloomingdale&#39;s!5e0!3m2!1sen!2sau!4v1496632273723" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9320443915285!2d-73.99570468440161!3d40.7195124450924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25987ca93a26f%3A0xa8bcefbb25e0645f!2sHome+Sweet+Home!5e0!3m2!1sen!2sau!4v1496632188580" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
+				'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.138310497503!2d-73.95370148440175!3d40.71497164537028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259596cfc174d%3A0x86b6b9e123c6dd36!2sUnion+Pool!5e0!3m2!1sen!2sau!4v1496632230715" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+			];
+			
+			
+/*			
+			//if I had time, I'd try to do this with a 2d array...
+			var bars2 = [
+				['Siggys', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6938935294097!2d-73.99531278440149!3d40.7247546447718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259850cbcc303%3A0x306bb91aab0eba0d!2sSiggy&#39;s+Good+Food!5e0!3m2!1sen!2sau!4v1496632019225" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'],
+				['Blind Tiger', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.3707261973327!2d-74.00542538440139!3d40.73186734433638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25993a10b6e59%3A0x974ded5ed3f5e014!2sBlind+Tiger!5e0!3m2!1sen!2sau!4v1496632108306" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'],
+				['Zum Schneider','<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.7164549364133!2d-73.98110568440155!3d40.72425804480216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25979dcad5647%3A0xeb77bc74cd054f06!2sZum+Schneider+NYC!5e0!3m2!1sen!2sau!4v1496632133539" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'],
+				['Home Sweet Home','<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9320443915285!2d-73.99570468440161!3d40.7195124450924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25987ca93a26f%3A0xa8bcefbb25e0645f!2sHome+Sweet+Home!5e0!3m2!1sen!2sau!4v1496632188580" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'],
+				['Union Pool', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.138310497503!2d-73.95370148440175!3d40.71497164537028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259596cfc174d%3A0x86b6b9e123c6dd36!2sUnion+Pool!5e0!3m2!1sen!2sau!4v1496632230715" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'],
+				['Bloomingdales', '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.811631951996!2d-74.00141568440152!3d40.722163044930284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598e1dc93331%3A0x624bf50cc1eb6d2!2sBloomingdale&#39;s!5e0!3m2!1sen!2sau!4v1496632273723" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>']
+			];
+*/
+
+			// Our List of Friends
+			var friends = [
+				'Mattan',
+				'Chris',
+				'Lee',
+				'Casey',
+				'that girl you forgot to text back',
+				'Kanye West'
+			];
+
+			var randomNumber = Math.floor(Math.random()*bars.length);
+			
+			var barname = bars[randomNumber];
+			var friendname = friends[randomNumber];
+			var barLocation = mapEmbeds[randomNumber];
+
+			document.write("How about you go to <strong>" + barname + "</strong> with <strong>" + friendname + "</strong>?" + barLocation);	
+		
+		</script>
+	</head>
+	<body>
+		<!-- PAGE CONTENT WILL BE PRINTED HERE --> 
+	</body>
+</html>

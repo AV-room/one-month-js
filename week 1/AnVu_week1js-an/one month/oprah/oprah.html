@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Oprah Likes You. And so do other people.</title>
+
+		<style>
+
+			/* Basic CSS comment */
+			body {
+				background: grey;
+				color: white;
+				width: 960px;
+				margin: 0 auto;
+				font-size: 30px;
+				color: black;
+			}
+
+			h1 {
+				font-size: 80px;
+				color: #333	;
+			}
+
+		</style>
+
+		<script>
+
+			/* this is an event */
+			/* alert("I'm annoying"); */
+
+			var username = prompt("Hello, who are you?");
+			var cars = new Array("BMW", "Saab", "Maserati");
+			console.log(cars);
+
+			if(username==="Chris" || username==="An") {
+				carWon(username);
+			}
+			else {
+				document.write("<h1>Hello " + username + "!");
+				document.write("<img src='oprah-hello.jpg' style='display:block' alt='Oprah says hello' >");
+			}
+			
+			//oops, just realised we were supposed to show the car
+			function carWon(username){
+				//figure out which car they win
+				var carWon = Math.floor(Math.random()*cars.length);
+			
+				document.write("<h1 style='display:inline;'>Hello " + username + " you won a " + cars[carWon] + "!</h1>");
+				document.write("<img src='oprah-car2.jpg' style='display:block; margin-bottom:50px;' alt='Oprah's excited for you!'>");
+				
+				if(cars[carWon] === 'BMW'){
+					document.write("<img src='bmw.jpg' alt='bmw' style='height:150px;'/>");
+					document.write("<img src='bmw1.jpg' alt='bmw1' style='height:150px;'/>");
+					document.write("<img src='bmw2.jpg' alt='bmw2' style='height:150px;'/>");
+				}
+				else if(cars[carWon] === 'Saab'){
+					document.write("<img src='saab.jpg' alt='saab' style='height:150px;'/>");
+					document.write("<img src='saab1.jpg' alt='saab1' style='height:150px;'/>");
+					document.write("<img src='saab3.jpg' alt='saab3' style='height:150px;'/>");
+				}
+				else if(cars[carWon] === 'Maserati'){
+					document.write("<img src='mas.jpg' alt='maserati' style='height:150px;'/>");
+					document.write("<img src='mas2.jpg' alt='maserati2' style='height:150px;'/>");
+					document.write("<img src='mas3.jpg' alt='maserati3' style='height:150px;'/>");
+				}
+				else {
+					document.write("<h1 style='display:inline;'> Sorry, we made a mistake :/ </h1>");
+				}
+				
+			}
+
+		</script>
+
+	</head>
+
+	<body>
+
+	</body>
+
+</html>
