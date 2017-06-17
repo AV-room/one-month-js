@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>classList, createElement() and appendChild()</title>
+</head>
+<body>
+
+   <div class="js-search-results">
+
+   </div>
+
+   <script type="text/javascript">
+   
+       //create an empty div and assign to the 'card' variable
+       var card = document.createElement('div');
+       
+       //add classes to the card div
+       card.classList.add('card');
+       
+       //add the card div to the js-search-results panel
+       var searchResults = document.querySelector('.js-search-results');
+       searchResults.appendChild(card);
+       
+   </script>
+</body>
+</html>
