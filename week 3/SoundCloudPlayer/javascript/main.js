@@ -1,43 +1,100 @@
-/* 1. Search */
-
+//declare namespace objects
 var UI = {};
-
-UI.EnterPress = function(){
-    
-};
-
-UI.SubmitClick = function(){
-    
-};
-
-/* 2. Query Soundcloud API */
-
 var SoundCloudAPI = {};
+var sideBar = document.querySelector('.js-playlist');
+
+
+/* 0. Initialise player */
 
 SoundCloudAPI.init = function(){
     
+    //restore playlist from previous session
+    if(localStorage.getItem('savedTracks') != null){
+        sideBar.innerHTML = sideBar.innerHTML + localStorage.getItem('savedTracks');
+    }
+    
+    //initialise SoundCloud connection params
     SC.initialize({
         client_id: 'cd9be64eeb32d1741c17cb39e41d254d'
     });    
 
-};
+}();
 
-SoundCloudAPI.init();
 
-SoundCloudAPI.getTrack = function(inputValue){
+/* 1. Search listeners */
+
+UI.SubmitClick = function(){
+    
+    document.querySelector('.js-submit').addEventListener('click', function(){
+    
+        //clear previous search results
+        var searchResults = document.querySelector('.js-search-results').innerHTML = "";
+        
+        //get user's input
+        var input = document.querySelector('.js-search').value;
+    
+        SoundCloudAPI.getTracks(input);
+
+    });
+
+}();
+
+UI.EnterPress = function(){
+    
+    document.querySelector('.js-search').addEventListener("keyup", function(e){
+        
+        var input = document.querySelector('.js-search').value;
+    
+        //get user's input only once they've pressed ENTER key
+        if(e.which === 13){
+            
+            //clear previous search results
+            var searchResults = document.querySelector('.js-search-results').innerHTML = "";
+            
+            SoundCloudAPI.getTracks(input);
+        
+        }
+    
+    });
+
+}();
+
+
+/* BONUS: Clear playlist listener */
+
+SoundCloudAPI.clearPlaylist = function(){
+   
+    document.querySelector('.js-clear').addEventListener('click', function(){
+    
+        //clear from local storage
+        window.localStorage.clear();
+        
+        //clear from sidebar panel
+        document.querySelector('.js-playlist').innerHTML = "";
+    
+    });
+    
+}();
+
+
+/* 2. Query Soundcloud API */
+
+SoundCloudAPI.getTracks = function(inputValue){
 
     // find all sounds related to the inputValue string
     // if we find anything, THEN (promise) display track cards on screen
     SC.get('/tracks', {
+        
         q: inputValue
+    
     }).then(function(tracks) {
+    
         console.log(tracks);
         SoundCloudAPI.renderTracks(tracks);
+    
     });
     
 };
-
-SoundCloudAPI.getTrack("Rilo Kiley");
 
 
 /* 3. Display the cards */
@@ -113,10 +170,6 @@ SoundCloudAPI.renderTracks = function(tracks){
 
 /* 4. Add to playlist and play */
 
-//restore playlist from previous session
-var sideBar = document.querySelector('.js-playlist');
-sideBar.innerHTML = localStorage.getItem('savedTracks');
-
 SoundCloudAPI.getEmbed = function(trackURL){
     
     SC.oEmbed(trackURL, {
@@ -138,7 +191,6 @@ SoundCloudAPI.getEmbed = function(trackURL){
     
     });
 };
-
 
 
 
