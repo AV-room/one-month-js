@@ -15,15 +15,15 @@ var pizzaData = [
 
 
 //TABLETOP
-tabletop.init = function(publicSpreadsheetUrl){
+function init(publicSpreadsheetUrl){
     console.log("tabletop.init");
     Tabletop.init( { key: publicSpreadsheetUrl,
-                     callback: tabletop.showInfo(pizzaData),
+                     callback: showInfo(pizzaData),
                      simpleSheet: true } );
-};
+}
 
 
-tabletop.showInfo = function(data, tabletop) {
+function showInfo(data, tabletop) {
     console.log("tabletop.showinfo");
     //alert('Successfully processed!');
     console.log(data);
@@ -35,29 +35,16 @@ tabletop.showInfo = function(data, tabletop) {
 //        document.querySelector('body').appendChild(h1);
 //    });
     
-    googleCharts.drawChart(pizzaData);
+    drawChart(pizzaData);
 }
 
 
 //GOOGLE CHARTS
 
 
-googleCharts.init = function(){
-    console.log("googleCharts.init");
-    // Load the Visualization API and the corechart package.
-    google.charts.load('current', {'packages':['corechart']});
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(tabletop.init());
 
-    // Callback that creates and populates a data table, 
-    // instantiates the pie chart, passes in the data and
-    // draws it.
-   
-  
-};
-
-googleCharts.drawChart = function(rawData) {
+function drawChart(rawData) {
     console.log("googleCharts.drawChart");
     /*// Create the data table.
     var data = new google.visualization.DataTable();
@@ -75,20 +62,20 @@ googleCharts.drawChart = function(rawData) {
     // Assume first row is header row
     // Assume first val in first row: string
     // Assume second val in first row: number
-    var processedData = new google.visualization.DataTable();
+    var data;
     rawData.forEach(function(currentRow, i){
         if(i > 0){
             //parse data
-            processedData.addRow(currentRow);
+            data.addRow(currentRow);
         }
         else{
             //parse header row
-            processedData.addColumn('string', rawData[0][0]);
-            processedData.addColumn('number', rawData[0][1]);
+            data.addColumn('string', rawData[0][0]);
+            data.addColumn('number', rawData[0][1]);
         }
     });
-
-    console.log("processed data: " + processedData);
+    var pdata = new google.visualization.arrayToDataTable(data);
+    console.log("processed data: " + data);
 
     // Set chart options
     var options = {'title':'How Much Pizza I Ate Last Night',
@@ -97,12 +84,27 @@ googleCharts.drawChart = function(rawData) {
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(processedData, options);
+    chart.draw(pdata, options);
 }
 
 
 
-window.addEventListener('DOMContentLoaded', googleCharts.init());
+//window.addEventListener('DOMContentLoaded', googlechartsInit());
+
+//googlechartsInit = function(){
+    //console.log("googleCharts.init");
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(init());
+
+    // Callback that creates and populates a data table, 
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+   
+  
+//};
 
 
 
