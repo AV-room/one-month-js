@@ -13,7 +13,7 @@ function showInfo(data, tabletop) {
     
     data.forEach(function(dataElement){
         var h1 = document.createElement('h1');
-        h1.innerHTML = dataElement.Name;
+        h1.innerHTML = dataElement.Name + " (" + dataElement.Category + ") - Healthiness: " + dataElement.Healthiness;
         document.querySelector('body').appendChild(h1);
     });
 }
